@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Majlis Berbuka Puasa - RSVP</title>
+    <title>Majlis Berbuka Puasa - NAIS Technologies</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #2D5A27;
-            --secondary: #D4AF37;
-            --accent: #8B0000;
-            --light: #F8F5E9;
-            --dark: #1A3C1E;
-            --shadow: 0 8px 30px rgba(0,0,0,0.08);
+            --primary: #1A3C6E;      /* NAIS Blue - Deep professional blue */
+            --secondary: #FF6B35;    /* NAIS Orange - Warm accent */
+            --accent: #2ECC71;       /* Success green */
+            --light: #F8FAFC;        /* Light background */
+            --dark: #0A2540;         /* Dark blue for text */
+            --shadow: 0 8px 30px rgba(10, 37, 64, 0.1);
         }
         
         * {
@@ -24,8 +24,8 @@
         
         body {
             font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #F8F5E9 0%, #E8F5E8 100%);
-            color: #333;
+            background: linear-gradient(135deg, #F8FAFC 0%, #E8F0F7 100%);
+            color: var(--dark);
             line-height: 1.6;
             min-height: 100vh;
             padding: 20px;
@@ -38,26 +38,67 @@
             border-radius: 20px;
             box-shadow: var(--shadow);
             overflow: hidden;
+            border: 1px solid #E2E8F0;
         }
         
         .header {
-            background: linear-gradient(to right, var(--primary), var(--dark));
+            background: linear-gradient(135deg, var(--primary) 0%, #2C5282 100%);
             color: white;
-            padding: 40px 30px;
+            padding: 30px;
             text-align: center;
             position: relative;
         }
         
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .logo {
+            height: 60px;
+            width: 60px;
+            background: white;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 1.8rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .logo-text {
+            text-align: left;
+        }
+        
+        .logo-text .company-name {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: white;
+        }
+        
+        .logo-text .tagline {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            color: #CBD5E0;
+        }
+        
         .header h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.8rem;
+            font-size: 2.5rem;
             margin-bottom: 10px;
             letter-spacing: 1px;
+            font-weight: 600;
         }
         
         .header p {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             opacity: 0.9;
+            color: #CBD5E0;
         }
         
         .header-decoration {
@@ -73,7 +114,7 @@
         }
         
         .invitation-details {
-            background: #F9F7F0;
+            background: linear-gradient(135deg, #F1F5F9 0%, #E2E8F0 100%);
             border-radius: 15px;
             padding: 25px;
             margin-bottom: 40px;
@@ -98,7 +139,7 @@
             color: white;
             width: 40px;
             height: 40px;
-            border-radius: 50%;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -123,16 +164,18 @@
         .form-control {
             width: 100%;
             padding: 14px 18px;
-            border: 2px solid #e0e0e0;
+            border: 2px solid #E2E8F0;
             border-radius: 10px;
             font-size: 1rem;
             transition: all 0.3s;
+            background: #F8FAFC;
         }
         
         .form-control:focus {
             border-color: var(--primary);
             outline: none;
-            box-shadow: 0 0 0 3px rgba(45, 90, 39, 0.1);
+            box-shadow: 0 0 0 3px rgba(26, 60, 110, 0.1);
+            background: white;
         }
         
         .radio-group {
@@ -155,7 +198,7 @@
         .radio-custom {
             width: 22px;
             height: 22px;
-            border: 2px solid #ccc;
+            border: 2px solid #CBD5E0;
             border-radius: 50%;
             display: inline-block;
             position: relative;
@@ -182,7 +225,7 @@
         }
         
         .submit-btn {
-            background: linear-gradient(to right, var(--primary), var(--dark));
+            background: linear-gradient(to right, var(--primary), var(--secondary));
             color: white;
             border: none;
             padding: 16px 40px;
@@ -198,7 +241,7 @@
         
         .submit-btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(45, 90, 39, 0.2);
+            box-shadow: 0 10px 20px rgba(26, 60, 110, 0.2);
         }
         
         .submit-btn:active {
@@ -208,10 +251,10 @@
         .footer {
             text-align: center;
             padding: 25px;
-            color: #666;
+            color: #64748B;
             font-size: 0.9rem;
-            border-top: 1px solid #eee;
-            background: #F9F9F9;
+            border-top: 1px solid #E2E8F0;
+            background: #F8FAFC;
         }
         
         .dashboard-link {
@@ -220,10 +263,14 @@
             color: var(--primary);
             text-decoration: none;
             font-weight: 500;
+            background: #E8F0F7;
+            padding: 8px 16px;
+            border-radius: 8px;
         }
         
         .dashboard-link:hover {
-            text-decoration: underline;
+            background: #DBEAFE;
+            color: var(--primary);
         }
         
         @media (max-width: 600px) {
@@ -232,7 +279,7 @@
             }
             
             .header h1 {
-                font-size: 2.2rem;
+                font-size: 2rem;
             }
             
             .content {
@@ -241,6 +288,11 @@
             
             .details-grid {
                 grid-template-columns: 1fr;
+            }
+            
+            .radio-group {
+                flex-direction: column;
+                gap: 15px;
             }
         }
     </style>
@@ -251,8 +303,19 @@
             <div class="header-decoration">
                 <i class="fas fa-moon"></i>
             </div>
+            
+            <div class="logo-container">
+                <div class="logo">
+                    N
+                </div>
+                <div class="logo-text">
+                    <div class="company-name">NAIS TECHNOLOGIES</div>
+                    <div class="tagline">Innovating Tomorrow, Today</div>
+                </div>
+            </div>
+            
             <h1>Majlis Berbuka Puasa</h1>
-            <p>Keluarga Ahmad & Zainab</p>
+            <p>March 2026 • Shah Alam</p>
         </div>
         
         <div class="content">
@@ -267,7 +330,7 @@
                         </div>
                         <div>
                             <strong>Date</strong>
-                            <p>15 April 2024 (Monday)</p>
+                            <p>6 March 2026 (Friday)</p>
                         </div>
                     </div>
                     
@@ -287,17 +350,7 @@
                         </div>
                         <div>
                             <strong>Location</strong>
-                            <p>Grand Ballroom, Seri Pacific Hotel<br>Kuala Lumpur</p>
-                        </div>
-                    </div>
-                    
-                    <div class="detail-item">
-                        <div class="detail-icon">
-                            <i class="fas fa-user-friends"></i>
-                        </div>
-                        <div>
-                            <strong>Dress Code</strong>
-                            <p>Traditional / Smart Casual</p>
+                            <p>Shah Alam<br>Venue To Be Confirmed</p>
                         </div>
                     </div>
                 </div>
@@ -305,7 +358,7 @@
             
             <div class="rsvp-form">
                 <h2 style="color: var(--primary); margin-bottom: 20px;">RSVP Form</h2>
-                <p style="margin-bottom: 25px; color: #666;">Please fill out this form by <strong>10 April 2024</strong> to help us with preparations.</p>
+                <p style="margin-bottom: 25px; color: #64748B;">Please fill out this form by <strong style="color: var(--primary);">1 March 2026</strong> to help us with preparations.</p>
                 
                 <form id="rsvpForm">
                     <div class="form-group">
@@ -334,17 +387,12 @@
                         </div>
                     </div>
                     
-                    <div class="form-group" id="numPeopleGroup">
+                    <div class="form-group hidden" id="numPeopleGroup">
                         <label for="numPeople">Number of People Attending *</label>
-                        <select id="numPeople" class="form-control" required>
-                            <option value="">Select number</option>
-                            <option value="1">1 person</option>
-                            <option value="2">2 people</option>
-                            <option value="3">3 people</option>
-                            <option value="4">4 people</option>
-                            <option value="5">5 people</option>
-                            <option value="6">6+ people</option>
-                        </select>
+                        <input type="number" id="numPeople" class="form-control" placeholder="Enter number of people (e.g., 2)" min="1" max="20">
+                        <small style="color: #64748B; font-size: 0.85rem; margin-top: 5px; display: block;">
+                            Please enter the total number of people including yourself
+                        </small>
                     </div>
                     
                     <button type="submit" class="submit-btn">
@@ -355,8 +403,10 @@
         </div>
         
         <div class="footer">
-            <p>For inquiries, please contact: +60 12-345 6789</p>
-            <a href="dashboard.html" class="dashboard-link">View Attendance Dashboard (Host Only)</a>
+            <p>For inquiries, please contact: +60 12-345 6789 | rsvp@naistech.com</p>
+            <a href="dashboard.html" class="dashboard-link">
+                <i class="fas fa-chart-line"></i> View Attendance Dashboard (Host Only)
+            </a>
         </div>
     </div>
 
@@ -391,26 +441,41 @@
             submitBtn.disabled = true;
             
             // Collect form data
+            const attendance = document.querySelector('input[name="attendance"]:checked').value;
             const formData = {
                 name: document.getElementById('name').value,
                 phone: document.getElementById('phone').value,
-                attendance: document.querySelector('input[name="attendance"]:checked').value,
-                numPeople: document.getElementById('numPeople').value
+                attendance: attendance,
+                numPeople: attendance === 'Hadir' ? document.getElementById('numPeople').value : 0
             };
+            
+            // Validate number of people if attending
+            if (attendance === 'Hadir') {
+                const numPeople = parseInt(formData.numPeople);
+                if (!numPeople || numPeople < 1) {
+                    alert('Please enter a valid number of people (minimum 1)');
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                    return;
+                }
+                if (numPeople > 20) {
+                    alert('Maximum 20 people per RSVP. Please contact host for larger groups.');
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                    return;
+                }
+            }
             
             try {
                 // Send data to Google Apps Script
                 const response = await fetch(APPS_SCRIPT_URL, {
                     method: 'POST',
-                    mode: 'no-cors', // Important for Google Apps Script
+                    mode: 'no-cors',
                     headers: {
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify(formData)
                 });
-                
-                // Since we're using no-cors, we can't read the response
-                // But we know it succeeded if we got here
                 
                 // Redirect to thank you page
                 window.location.href = 'thankyou.html';
