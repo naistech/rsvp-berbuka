@@ -8,11 +8,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #1A3C6E;      /* NAIS Blue - Deep professional blue */
-            --secondary: #FF6B35;    /* NAIS Orange - Warm accent */
-            --accent: #2ECC71;       /* Success green */
-            --light: #F8FAFC;        /* Light background */
-            --dark: #0A2540;         /* Dark blue for text */
+            --primary: #1A3C6E;
+            --secondary: #FF6B35;
+            --accent: #2ECC71;
+            --light: #F8FAFC;
+            --dark: #0A2540;
             --shadow: 0 8px 30px rgba(10, 37, 64, 0.1);
         }
         
@@ -57,18 +57,10 @@
             margin-bottom: 20px;
         }
         
-        .logo {
+        .logo-image {
             height: 60px;
-            width: 60px;
-            background: white;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--primary);
-            font-weight: 700;
-            font-size: 1.8rem;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            width: auto;
+            object-fit: contain;
         }
         
         .logo-text {
@@ -257,20 +249,28 @@
             background: #F8FAFC;
         }
         
-        .dashboard-link {
-            display: inline-block;
-            margin-top: 15px;
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: 500;
-            background: #E8F0F7;
-            padding: 8px 16px;
-            border-radius: 8px;
+        .contact-info {
+            margin-bottom: 15px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
         }
         
-        .dashboard-link:hover {
-            background: #DBEAFE;
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .contact-link {
             color: var(--primary);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .contact-link:hover {
+            color: var(--secondary);
         }
         
         @media (max-width: 600px) {
@@ -294,6 +294,15 @@
                 flex-direction: column;
                 gap: 15px;
             }
+            
+            .contact-info {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .contact-item {
+                justify-content: center;
+            }
         }
     </style>
 </head>
@@ -305,7 +314,8 @@
             </div>
             
             <div class="logo-container">
-                <div class="logo">
+                <img src="https://nais.com.my/images/NAISICON.png" alt="NAIS Technologies" class="logo-image" onerror="this.style.display='none'; document.getElementById('fallbackLogo').style.display='flex';">
+                <div id="fallbackLogo" class="logo-image" style="display: none; height: 60px; width: 60px; background: white; border-radius: 12px; align-items: center; justify-content: center; color: var(--primary); font-weight: 700; font-size: 1.8rem;">
                     N
                 </div>
                 <div class="logo-text">
@@ -403,10 +413,19 @@
         </div>
         
         <div class="footer">
-            <p>For inquiries, please contact: +60 12-345 6789 | rsvp@naistech.com</p>
-            <a href="dashboard.html" class="dashboard-link">
-                <i class="fas fa-chart-line"></i> View Attendance Dashboard (Host Only)
-            </a>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <a href="tel:+60132169580" class="contact-link">+60 13-216 9580</a>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <a href="mailto:support@nais.com.my" class="contact-link">support@nais.com.my</a>
+                </div>
+            </div>
+            <p style="color: #94A3B8; font-size: 0.85rem; margin-top: 10px;">
+                NAIS Technologies Sdn Bhd • Majlis Berbuka Puasa 2026
+            </p>
         </div>
     </div>
 
