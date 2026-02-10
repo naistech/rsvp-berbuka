@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Attendance Dashboard - Majlis Berbuka Puasa</title>
+    <title>Thank You - NAIS Technologies Majlis</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #2D5A27;
-            --secondary: #D4AF37;
-            --accent: #8B0000;
-            --light: #F8F5E9;
-            --dark: #1A3C1E;
+            --primary: #1A3C6E;
+            --secondary: #FF6B35;
+            --accent: #2ECC71;
+            --light: #F8FAFC;
+            --dark: #0A2540;
         }
         
         * {
@@ -23,432 +23,250 @@
         
         body {
             font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #F0F7ED 0%, #E8F5E8 100%);
-            color: #333;
+            background: linear-gradient(135deg, #F8FAFC 0%, #E8F0F7 100%);
+            color: var(--dark);
             line-height: 1.6;
             min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             padding: 20px;
         }
         
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        .header {
+        .thank-you-container {
+            max-width: 600px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(10, 37, 64, 0.1);
+            overflow: hidden;
             text-align: center;
-            margin-bottom: 40px;
-            padding: 30px;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.05);
+            padding: 50px 40px;
+            border: 1px solid #E2E8F0;
         }
         
-        .header h1 {
-            color: var(--primary);
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-        }
-        
-        .header p {
-            color: #666;
-            font-size: 1.1rem;
-        }
-        
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
-            margin-bottom: 40px;
-        }
-        
-        .stat-card {
-            background: white;
-            border-radius: 15px;
-            padding: 30px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.05);
-            text-align: center;
-            transition: transform 0.3s;
-        }
-        
-        .stat-card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .stat-card.primary {
-            border-top: 5px solid var(--primary);
-        }
-        
-        .stat-card.secondary {
-            border-top: 5px solid var(--secondary);
-        }
-        
-        .stat-card.accent {
-            border-top: 5px solid var(--accent);
-        }
-        
-        .stat-icon {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-        }
-        
-        .primary .stat-icon {
-            color: var(--primary);
-        }
-        
-        .secondary .stat-icon {
-            color: var(--secondary);
-        }
-        
-        .accent .stat-icon {
-            color: var(--accent);
-        }
-        
-        .stat-number {
-            font-size: 3rem;
-            font-weight: 700;
-            margin: 10px 0;
-        }
-        
-        .primary .stat-number {
-            color: var(--primary);
-        }
-        
-        .secondary .stat-number {
-            color: var(--secondary);
-        }
-        
-        .accent .stat-number {
-            color: var(--accent);
-        }
-        
-        .stat-label {
-            font-size: 1.1rem;
-            color: #666;
-        }
-        
-        .recent-rsvp {
-            background: white;
-            border-radius: 15px;
-            padding: 30px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.05);
+        .logo-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
             margin-bottom: 30px;
         }
         
-        .recent-rsvp h2 {
-            color: var(--primary);
-            margin-bottom: 25px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid #f0f0f0;
-        }
-        
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        
-        th {
-            background: #F8F9FA;
-            padding: 15px;
-            text-align: left;
-            color: var(--dark);
-            font-weight: 600;
-            border-bottom: 2px solid #eee;
-        }
-        
-        td {
-            padding: 15px;
-            border-bottom: 1px solid #eee;
-        }
-        
-        tr:hover {
-            background: #F9FDF8;
-        }
-        
-        .attendance-badge {
-            display: inline-block;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 500;
-        }
-        
-        .attending {
-            background: #E8F5E9;
-            color: var(--primary);
-        }
-        
-        .not-attending {
-            background: #FFEBEE;
-            color: #C62828;
-        }
-        
-        .controls {
+        .logo {
+            height: 50px;
+            width: 50px;
+            background: var(--primary);
+            border-radius: 10px;
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            margin-bottom: 25px;
-            flex-wrap: wrap;
-            gap: 15px;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 1.5rem;
         }
         
-        .refresh-btn {
+        .logo-text {
+            text-align: left;
+        }
+        
+        .logo-text .company-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .logo-text .event-name {
+            font-size: 0.9rem;
+            color: #64748B;
+        }
+        
+        .success-icon {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, var(--accent) 0%, #27AE60 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px;
+            color: white;
+            font-size: 3rem;
+            border: 4px solid #E8F0F7;
+        }
+        
+        h1 {
+            color: var(--primary);
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        p {
+            font-size: 1.1rem;
+            color: #475569;
+            margin-bottom: 25px;
+        }
+        
+        .highlight {
+            background: linear-gradient(135deg, #F1F5F9 0%, #E2E8F0 100%);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 30px 0;
+            border-left: 4px solid var(--secondary);
+        }
+        
+        .highlight h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .event-details {
+            text-align: left;
+        }
+        
+        .event-detail {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .event-detail:last-child {
+            margin-bottom: 0;
+        }
+        
+        .detail-icon {
             background: var(--primary);
             color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 10px;
-            cursor: pointer;
-            font-weight: 500;
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
             display: flex;
             align-items: center;
-            gap: 10px;
-            transition: all 0.3s;
+            justify-content: center;
+            font-size: 1rem;
+            flex-shrink: 0;
         }
         
-        .refresh-btn:hover {
-            background: var(--dark);
-            transform: translateY(-2px);
-        }
-        
-        .last-updated {
-            color: #666;
-            font-size: 0.9rem;
-        }
-        
-        .back-link {
+        .btn {
             display: inline-block;
-            margin-top: 30px;
-            color: var(--primary);
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
             text-decoration: none;
-            font-weight: 500;
+            padding: 15px 35px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-top: 20px;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
         }
         
-        .back-link:hover {
-            text-decoration: underline;
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(26, 60, 110, 0.2);
         }
         
-        .loading {
-            text-align: center;
-            padding: 40px;
-            color: #666;
+        .contact-info {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #E2E8F0;
+            color: #64748B;
         }
         
-        @media (max-width: 768px) {
-            .stats-grid {
-                grid-template-columns: 1fr;
+        .contact-info p {
+            margin-bottom: 10px;
+        }
+        
+        @media (max-width: 600px) {
+            .thank-you-container {
+                padding: 30px 20px;
             }
             
-            table {
-                display: block;
-                overflow-x: auto;
+            h1 {
+                font-size: 2rem;
             }
             
-            .controls {
+            .logo-header {
                 flex-direction: column;
-                align-items: stretch;
+                text-align: center;
+            }
+            
+            .logo-text {
+                text-align: center;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1><i class="fas fa-chart-line"></i> Attendance Dashboard</h1>
-            <p>Majlis Berbuka Puasa - Live RSVP Data</p>
-        </div>
-        
-        <div class="controls">
-            <button id="refreshBtn" class="refresh-btn">
-                <i class="fas fa-sync-alt"></i> Refresh Data
-            </button>
-            <div class="last-updated">
-                Last updated: <span id="lastUpdated">Loading...</span>
+    <div class="thank-you-container">
+        <div class="logo-header">
+            <div class="logo">
+                N
+            </div>
+            <div class="logo-text">
+                <div class="company-name">NAIS TECHNOLOGIES</div>
+                <div class="event-name">Majlis Berbuka Puasa 2026</div>
             </div>
         </div>
         
-        <div class="stats-grid">
-            <div class="stat-card primary">
-                <div class="stat-icon">
-                    <i class="fas fa-users"></i>
+        <div class="success-icon">
+            <i class="fas fa-check-circle"></i>
+        </div>
+        
+        <h1>Thank You!</h1>
+        <p>Your RSVP has been successfully submitted to NAIS Technologies Sdn Bhd.</p>
+        
+        <div class="highlight">
+            <h3><i class="fas fa-info-circle"></i> Event Details</h3>
+            <div class="event-details">
+                <div class="event-detail">
+                    <div class="detail-icon">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <div>
+                        <strong>Date</strong>
+                        <p>6 March 2026 (Friday)</p>
+                    </div>
                 </div>
-                <div class="stat-number" id="totalAttendees">0</div>
-                <div class="stat-label">Total Attendees</div>
-            </div>
-            
-            <div class="stat-card secondary">
-                <div class="stat-icon">
-                    <i class="fas fa-clipboard-check"></i>
+                
+                <div class="event-detail">
+                    <div class="detail-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div>
+                        <strong>Time</strong>
+                        <p>6:30 PM - 9:00 PM</p>
+                    </div>
                 </div>
-                <div class="stat-number" id="totalResponses">0</div>
-                <div class="stat-label">Total Responses</div>
-            </div>
-            
-            <div class="stat-card accent">
-                <div class="stat-icon">
-                    <i class="fas fa-calendar-check"></i>
+                
+                <div class="event-detail">
+                    <div class="detail-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div>
+                        <strong>Location</strong>
+                        <p>Shah Alam<br>Venue To Be Confirmed</p>
+                    </div>
                 </div>
-                <div class="stat-number" id="attendanceRate">0%</div>
-                <div class="stat-label">Attendance Rate</div>
             </div>
         </div>
         
-        <div class="recent-rsvp">
-            <h2><i class="fas fa-history"></i> Recent RSVPs</h2>
-            <div id="loadingTable" class="loading">
-                <i class="fas fa-spinner fa-spin"></i> Loading RSVP data...
-            </div>
-            <table id="rsvpTable" style="display: none;">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Phone</th>
-                        <th>Attendance</th>
-                        <th>Number of People</th>
-                        <th>Timestamp</th>
-                    </tr>
-                </thead>
-                <tbody id="rsvpTableBody">
-                    <!-- Data will be inserted here -->
-                </tbody>
-            </table>
-        </div>
+        <p>We look forward to sharing this blessed occasion with you. If you need to update your RSVP or have any questions, please contact us.</p>
         
-        <div style="text-align: center;">
-            <a href="index.html" class="back-link">
-                <i class="fas fa-arrow-left"></i> Back to Invitation Page
-            </a>
+        <a href="index.html" class="btn">
+            <i class="fas fa-arrow-left"></i> Back to Invitation
+        </a>
+        
+        <div class="contact-info">
+            <p><i class="fas fa-phone"></i> +60 12-345 6789</p>
+            <p><i class="fas fa-envelope"></i> rsvp@naistech.com</p>
         </div>
     </div>
-
-    <script>
-        // Your Apps Script deployment URL
-        const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbymZBeX_0pmRYKvj-vFE01enZU5FTWFfFD3tJJ2CNzpvpdtHC_gyyZfrp1Y_g72KdPfvQ/exec';
-        
-        let dashboardData = null;
-        
-        // Format date
-        function formatDate(dateString) {
-            const date = new Date(dateString);
-            return date.toLocaleDateString('en-MY', {
-                day: '2-digit',
-                month: 'short',
-                year: 'numeric',
-                hour: '2-digit',
-                minute: '2-digit'
-            });
-        }
-        
-        // Fetch dashboard data
-        async function fetchDashboardData() {
-            try {
-                // Add timestamp to prevent caching
-                const url = APPS_SCRIPT_URL + '?t=' + new Date().getTime();
-                const response = await fetch(url);
-                const data = await response.json();
-                
-                if (data.success) {
-                    dashboardData = data;
-                    updateDashboard();
-                    updateLastUpdated();
-                } else {
-                    throw new Error(data.error || 'Failed to fetch data');
-                }
-            } catch (error) {
-                console.error('Error loading dashboard data:', error);
-                document.getElementById('loadingTable').innerHTML = 
-                    '<i class="fas fa-exclamation-triangle"></i> Error loading data. Please try again.';
-            }
-        }
-        
-        // Update dashboard UI
-        function updateDashboard() {
-            // Update stats
-            document.getElementById('totalAttendees').textContent = dashboardData.totalAttendees;
-            document.getElementById('totalResponses').textContent = dashboardData.totalResponses;
-            
-            // Calculate attendance rate
-            const attendanceRate = dashboardData.totalResponses > 0 
-                ? Math.round((dashboardData.totalAttendees / (dashboardData.totalResponses * 2)) * 100) 
-                : 0;
-            document.getElementById('attendanceRate').textContent = attendanceRate + '%';
-            
-            // Update recent RSVPs table
-            const tableBody = document.getElementById('rsvpTableBody');
-            tableBody.innerHTML = '';
-            
-            if (dashboardData.latestRSVPs && dashboardData.latestRSVPs.length > 0) {
-                dashboardData.latestRSVPs.forEach(row => {
-                    // Skip header row if present
-                    if (row[0] === 'Timestamp') return;
-                    
-                    const tr = document.createElement('tr');
-                    
-                    // Name
-                    const tdName = document.createElement('td');
-                    tdName.textContent = row[1] || 'N/A';
-                    tr.appendChild(tdName);
-                    
-                    // Phone
-                    const tdPhone = document.createElement('td');
-                    tdPhone.textContent = row[2] || 'N/A';
-                    tr.appendChild(tdPhone);
-                    
-                    // Attendance
-                    const tdAttendance = document.createElement('td');
-                    const badge = document.createElement('span');
-                    badge.className = `attendance-badge ${row[3] === 'Hadir' ? 'attending' : 'not-attending'}`;
-                    badge.textContent = row[3] || 'N/A';
-                    tdAttendance.appendChild(badge);
-                    tr.appendChild(tdAttendance);
-                    
-                    // Number of people
-                    const tdNumPeople = document.createElement('td');
-                    tdNumPeople.textContent = row[3] === 'Hadir' ? (row[4] || '1') : '0';
-                    tr.appendChild(tdNumPeople);
-                    
-                    // Timestamp
-                    const tdTimestamp = document.createElement('td');
-                    tdTimestamp.textContent = formatDate(row[0]);
-                    tr.appendChild(tdTimestamp);
-                    
-                    tableBody.appendChild(tr);
-                });
-                
-                // Show table
-                document.getElementById('loadingTable').style.display = 'none';
-                document.getElementById('rsvpTable').style.display = 'table';
-            } else {
-                document.getElementById('loadingTable').innerHTML = 
-                    '<i class="fas fa-info-circle"></i> No RSVP data yet.';
-            }
-        }
-        
-        // Update last updated time
-        function updateLastUpdated() {
-            const now = new Date();
-            document.getElementById('lastUpdated').textContent = now.toLocaleTimeString('en-MY');
-        }
-        
-        // Refresh button event
-        document.getElementById('refreshBtn').addEventListener('click', async function() {
-            const btn = this;
-            const originalHtml = btn.innerHTML;
-            
-            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Refreshing...';
-            btn.disabled = true;
-            
-            await fetchDashboardData();
-            
-            btn.innerHTML = originalHtml;
-            btn.disabled = false;
-        });
-        
-        // Auto-refresh every 30 seconds
-        setInterval(fetchDashboardData, 30000);
-        
-        // Initial load
-        fetchDashboardData();
-    </script>
 </body>
 </html>
