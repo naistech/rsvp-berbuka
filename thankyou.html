@@ -88,7 +88,6 @@
             height: 60px;
             width: auto;
             object-fit: contain;
-            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
         }
         
         .logo-text {
@@ -153,6 +152,20 @@
             color: var(--gray);
             margin-bottom: 30px;
             line-height: 1.8;
+        }
+        
+        .email-confirmation {
+            background: linear-gradient(135deg, rgba(46, 204, 113, 0.1) 0%, rgba(39, 174, 96, 0.1) 100%);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 25px 0;
+            border-left: 4px solid var(--accent);
+        }
+        
+        .email-confirmation p {
+            margin: 0;
+            color: #065F46;
+            font-weight: 500;
         }
         
         .highlight {
@@ -372,7 +385,11 @@
         </div>
         
         <h1>Thank You!</h1>
-        <p>Your RSVP has been successfully submitted to NAIS Technologies Sdn Bhd. We have recorded your attendance.</p>
+        <p>Your RSVP has been successfully submitted to NAIS Technologies Sdn Bhd.</p>
+        
+        <div class="email-confirmation">
+            <p><i class="fas fa-envelope"></i> The official invitation will be sent to your email address</p>
+        </div>
         
         <div class="highlight">
             <h3><i class="fas fa-info-circle"></i> Event Details</h3>
