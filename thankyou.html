@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thank You - NAIS Technologies Majlis</title>
+    <title>Thank You - NAIS Technologies</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -35,7 +35,7 @@
         .thank-you-container {
             max-width: 600px;
             background: white;
-            border-radius: 24px;
+            border-radius: 20px;
             box-shadow: 0 20px 40px rgba(10, 37, 64, 0.1);
             overflow: hidden;
             text-align: center;
@@ -43,30 +43,59 @@
             border: 1px solid #E2E8F0;
         }
         
+        .logo-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .logo-image {
+            height: 50px;
+            width: auto;
+            object-fit: contain;
+        }
+        
+        .logo-text {
+            text-align: left;
+        }
+        
+        .logo-text .company-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
         .success-icon {
-            width: 100px;
-            height: 100px;
-            background: linear-gradient(135deg, var(--accent) 0%, #27AE60 100%);
+            width: 80px;
+            height: 80px;
+            background: var(--accent);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 auto 30px;
             color: white;
-            font-size: 3rem;
+            font-size: 2.5rem;
         }
         
         h1 {
             color: var(--primary);
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-            font-weight: 600;
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+        }
+        
+        p {
+            font-size: 1.1rem;
+            color: #475569;
+            margin-bottom: 25px;
         }
         
         .email-notice {
             background: rgba(46, 204, 113, 0.1);
             padding: 20px;
-            border-radius: 15px;
+            border-radius: 12px;
             margin: 30px 0;
             border-left: 4px solid var(--accent);
         }
@@ -77,9 +106,39 @@
             margin: 0;
         }
         
+        .event-details {
+            background: #F8FAFC;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 30px 0;
+            text-align: left;
+        }
+        
+        .event-detail {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .event-detail:last-child {
+            margin-bottom: 0;
+        }
+        
+        .detail-icon {
+            background: var(--primary);
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
         .btn {
             display: inline-block;
-            background: linear-gradient(to right, var(--primary), var(--secondary));
+            background: linear-gradient(to right, var(--primary), #2C5282);
             color: white;
             text-decoration: none;
             padding: 15px 35px;
@@ -101,34 +160,124 @@
             border-top: 1px solid #E2E8F0;
             color: #64748B;
         }
+        
+        @media (max-width: 600px) {
+            .thank-you-container {
+                padding: 30px 20px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="thank-you-container">
+        <div class="logo-header">
+            <img src="NAISICON.png" alt="NAIS Technologies" class="logo-image" 
+                 onerror="this.onerror=null; this.src='https://nais.com.my/images/NAISICON.png';">
+            <div class="logo-text">
+                <div class="company-name">NAIS TECHNOLOGIES</div>
+            </div>
+        </div>
+        
         <div class="success-icon">
             <i class="fas fa-check-circle"></i>
         </div>
         
         <h1>Thank You!</h1>
-        <p>Your RSVP has been successfully submitted to NAIS Technologies Sdn Bhd.</p>
+        
+        <div id="thankYouMessage">
+            <!-- Dynamic content will be inserted here -->
+        </div>
         
         <div class="email-notice">
-            <p><i class="fas fa-envelope"></i> The official invitation has been sent to your email address</p>
+            <p><i class="fas fa-envelope"></i> Invitation sent to your email</p>
             <p style="font-size: 0.9rem; margin-top: 10px;">
-                Please check your inbox (and spam folder) for the invitation email.
+                Please check your inbox (and spam folder) for the official invitation
             </p>
         </div>
         
-        <p>If you did not receive the email within a few minutes, please contact us.</p>
+        <div class="event-details">
+            <h3 style="color: var(--primary); margin-bottom: 15px;">Event Details:</h3>
+            <div class="event-detail">
+                <div class="detail-icon">
+                    <i class="fas fa-calendar-alt"></i>
+                </div>
+                <div>
+                    <strong>Date</strong>
+                    <p>6 March 2026 (Friday)</p>
+                </div>
+            </div>
+            
+            <div class="event-detail">
+                <div class="detail-icon">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <div>
+                    <strong>Time</strong>
+                    <p>6:30 PM - 9:00 PM</p>
+                </div>
+            </div>
+            
+            <div class="event-detail">
+                <div class="detail-icon">
+                    <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <div>
+                    <strong>Location</strong>
+                    <p>Shah Alam<br>Venue To Be Confirmed</p>
+                </div>
+            </div>
+        </div>
         
         <a href="index.html" class="btn">
-            <i class="fas fa-plus"></i> Submit Another RSVP
+            <i class="fas fa-home"></i> Return to Home
         </a>
         
         <div class="contact-info">
-            <p><i class="fas fa-phone"></i> +60 13-216 9580</p>
-            <p><i class="fas fa-envelope"></i> support@nais.com.my</p>
+            <p>For inquiries: +60 13-216 9580 | support@nais.com.my</p>
         </div>
     </div>
+
+    <script>
+        // Get RSVP data from session storage
+        const rsvpData = JSON.parse(sessionStorage.getItem('rsvpData') || '{}');
+        
+        // Display personalized message
+        const messageDiv = document.getElementById('thankYouMessage');
+        
+        if (rsvpData.name && rsvpData.attendance) {
+            let message = '';
+            
+            if (rsvpData.attendance === 'Hadir') {
+                message = `
+                    <p>Dear <strong>${rsvpData.name}</strong>,</p>
+                    <p>Your RSVP has been successfully recorded for <strong>${rsvpData.numPeople} person${rsvpData.numPeople > 1 ? 's' : ''}</strong>.</p>
+                    <p>We look forward to welcoming you to our Majlis Berbuka Puasa.</p>
+                `;
+            } else {
+                message = `
+                    <p>Dear <strong>${rsvpData.name}</strong>,</p>
+                    <p>Thank you for letting us know you cannot attend.</p>
+                    <p>We appreciate your response and hope to see you at future events.</p>
+                `;
+            }
+            
+            messageDiv.innerHTML = message;
+        } else {
+            // Fallback if no data
+            messageDiv.innerHTML = `
+                <p>Your RSVP has been successfully submitted to NAIS Technologies Sdn Bhd.</p>
+                <p>We have recorded your attendance for the Majlis Berbuka Puasa.</p>
+            `;
+        }
+        
+        // Clear the data after displaying
+        setTimeout(() => {
+            sessionStorage.removeItem('rsvpData');
+        }, 5000);
+    </script>
 </body>
 </html>
