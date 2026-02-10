@@ -10,12 +10,15 @@
         :root {
             --primary: #1A3C6E;
             --primary-light: #2C5282;
+            --primary-dark: #0A2540;
             --secondary: #FF6B35;
             --accent: #2ECC71;
             --light: #F8FAFC;
             --dark: #0F172A;
             --gray: #64748B;
             --light-gray: #E2E8F0;
+            --shadow: 0 20px 40px rgba(10, 37, 64, 0.1);
+            --gradient: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
         }
         
         * {
@@ -31,23 +34,54 @@
             line-height: 1.6;
             min-height: 100vh;
             padding: 20px;
+            animation: fadeIn 1s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateX(-30px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
         }
         
         .container {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
             background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(10, 37, 64, 0.1);
+            border-radius: 24px;
+            box-shadow: var(--shadow);
             overflow: hidden;
             border: 1px solid var(--light-gray);
+            animation: slideIn 0.8s ease-out;
         }
         
         .header {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            background: var(--gradient);
             color: white;
             padding: 40px 30px;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 30px 30px;
+            animation: float 20s linear infinite;
         }
         
         .logo-container {
@@ -56,12 +90,25 @@
             justify-content: center;
             gap: 20px;
             margin-bottom: 25px;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        /* Logo Container with white background to preserve original look */
+        .logo-wrapper {
+            background: white;
+            padding: 15px;
+            border-radius: 16px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         
         .logo-image {
             height: 70px;
             width: auto;
             object-fit: contain;
+            /* Remove any filters that might affect appearance */
         }
         
         .logo-text {
@@ -72,6 +119,7 @@
             font-family: 'Playfair Display', serif;
             font-size: 2.2rem;
             font-weight: 700;
+            letter-spacing: 0.5px;
             color: white;
             margin-bottom: 5px;
         }
@@ -79,109 +127,220 @@
         .logo-text .tagline {
             font-size: 1rem;
             font-weight: 300;
+            letter-spacing: 1px;
             color: rgba(255, 255, 255, 0.9);
         }
         
         .header h1 {
             font-family: 'Playfair Display', serif;
-            font-size: 2.8rem;
+            font-size: 3rem;
             margin-bottom: 15px;
+            letter-spacing: 1px;
+            font-weight: 600;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            font-weight: 300;
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .header-decoration {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            font-size: 2.5rem;
+            color: var(--secondary);
+            animation: float 4s ease-in-out infinite;
         }
         
         .content {
-            padding: 40px;
+            padding: 50px;
         }
         
         .invitation-details {
-            background: #F8FAFC;
-            border-radius: 15px;
-            padding: 30px;
-            margin-bottom: 40px;
-            border-left: 5px solid var(--secondary);
+            background: linear-gradient(135deg, #F8FAFC 0%, #F1F5F9 100%);
+            border-radius: 20px;
+            padding: 35px;
+            margin-bottom: 50px;
+            border: 1px solid var(--light-gray);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+        
+        .invitation-details:hover {
+            transform: translateY(-5px);
+        }
+        
+        .invitation-details::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: var(--gradient);
+        }
+        
+        .invitation-details h2 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 600;
+        }
+        
+        .invitation-details > p {
+            font-size: 1.1rem;
+            color: var(--gray);
+            margin-bottom: 30px;
+            line-height: 1.8;
         }
         
         .details-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
+            gap: 25px;
+            margin-top: 25px;
         }
         
         .detail-item {
             display: flex;
             align-items: center;
-            gap: 15px;
-            padding: 15px;
+            gap: 20px;
+            padding: 20px;
             background: white;
-            border-radius: 10px;
+            border-radius: 15px;
             border: 1px solid var(--light-gray);
+            transition: all 0.3s ease;
+            animation: slideIn 0.6s ease-out backwards;
+        }
+        
+        .detail-item:nth-child(2) { animation-delay: 0.1s; }
+        .detail-item:nth-child(3) { animation-delay: 0.2s; }
+        
+        .detail-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(10, 37, 64, 0.1);
+            border-color: var(--primary);
         }
         
         .detail-icon {
-            background: var(--primary);
+            background: var(--gradient);
             color: white;
-            width: 40px;
-            height: 40px;
-            border-radius: 10px;
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
+            font-size: 1.4rem;
+            flex-shrink: 0;
+        }
+        
+        .detail-content strong {
+            display: block;
+            color: var(--primary);
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+        
+        .detail-content p {
+            color: var(--gray);
+        }
+        
+        .rsvp-form {
+            margin-top: 40px;
+        }
+        
+        .rsvp-form h2 {
+            color: var(--primary);
+            margin-bottom: 25px;
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 600;
+        }
+        
+        .rsvp-form > p {
+            font-size: 1.1rem;
+            color: var(--gray);
+            margin-bottom: 30px;
         }
         
         .form-group {
-            margin-bottom: 25px;
+            margin-bottom: 30px;
+            animation: slideIn 0.6s ease-out backwards;
         }
+        
+        .form-group:nth-child(1) { animation-delay: 0.1s; }
+        .form-group:nth-child(2) { animation-delay: 0.2s; }
+        .form-group:nth-child(3) { animation-delay: 0.3s; }
+        .form-group:nth-child(4) { animation-delay: 0.4s; }
         
         .form-group label {
             display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
+            margin-bottom: 10px;
+            font-weight: 600;
             color: var(--dark);
+            font-size: 1.05rem;
         }
         
         .form-control {
             width: 100%;
-            padding: 14px 16px;
+            padding: 16px 20px;
             border: 2px solid var(--light-gray);
-            border-radius: 10px;
+            border-radius: 12px;
             font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s ease;
+            background: #F8FAFC;
         }
         
         .form-control:focus {
             border-color: var(--primary);
             outline: none;
+            box-shadow: 0 0 0 4px rgba(26, 60, 110, 0.1);
+            background: white;
+            transform: translateY(-2px);
         }
         
         .radio-group {
             display: flex;
-            gap: 20px;
+            gap: 25px;
             margin-top: 10px;
         }
         
         .radio-option {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 12px;
             cursor: pointer;
+            padding: 12px 20px;
+            background: #F8FAFC;
+            border-radius: 10px;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
         }
         
-        .radio-custom {
-            width: 20px;
-            height: 20px;
-            border: 2px solid var(--light-gray);
-            border-radius: 50%;
-            position: relative;
+        .radio-option:hover {
+            background: #E8F0F7;
+            transform: translateY(-2px);
         }
         
         .radio-option input:checked + .radio-custom {
             border-color: var(--primary);
+            background: var(--primary);
         }
         
         .radio-option input:checked + .radio-custom::after {
             content: '';
-            width: 10px;
-            height: 10px;
-            background: var(--primary);
+            width: 12px;
+            height: 12px;
+            background: white;
             border-radius: 50%;
             position: absolute;
             top: 50%;
@@ -189,67 +348,121 @@
             transform: translate(-50%, -50%);
         }
         
+        .radio-custom {
+            width: 24px;
+            height: 24px;
+            border: 2px solid var(--light-gray);
+            border-radius: 50%;
+            display: inline-block;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
         .hidden {
             display: none;
         }
         
         .submit-btn {
-            background: linear-gradient(to right, var(--primary), var(--primary-light));
+            background: var(--gradient);
             color: white;
             border: none;
-            padding: 16px 40px;
-            font-size: 1.1rem;
-            border-radius: 10px;
-            cursor: pointer;
+            padding: 18px 45px;
+            font-size: 1.2rem;
             font-weight: 600;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
             width: 100%;
-            margin-top: 20px;
-            transition: all 0.3s;
+            margin-top: 30px;
+            animation: float 4s ease-in-out infinite;
         }
         
-        .submit-btn:hover:not(:disabled) {
+        .submit-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(26, 60, 110, 0.2);
+        }
+        
+        .submit-btn:active {
             transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(26, 60, 110, 0.2);
-        }
-        
-        .submit-btn:disabled {
-            opacity: 0.7;
-            cursor: not-allowed;
         }
         
         .footer {
             text-align: center;
-            padding: 25px;
+            padding: 35px;
             color: var(--gray);
+            font-size: 0.95rem;
             border-top: 1px solid var(--light-gray);
             background: #F8FAFC;
         }
         
         .contact-info {
+            margin-bottom: 20px;
             display: flex;
+            flex-wrap: wrap;
             justify-content: center;
             gap: 30px;
-            margin-bottom: 15px;
         }
         
         .contact-item {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 12px;
+            padding: 12px 24px;
+            background: white;
+            border-radius: 10px;
+            border: 1px solid var(--light-gray);
+            transition: all 0.3s ease;
+        }
+        
+        .contact-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 16px rgba(10, 37, 64, 0.1);
+            border-color: var(--primary);
         }
         
         .contact-link {
             color: var(--primary);
             text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .contact-link:hover {
+            color: var(--secondary);
+        }
+        
+        .footer-text {
+            color: #94A3B8;
+            font-size: 0.9rem;
+            margin-top: 20px;
+            font-weight: 300;
+            letter-spacing: 0.5px;
         }
         
         @media (max-width: 768px) {
+            .container {
+                border-radius: 20px;
+            }
+            
+            .header {
+                padding: 30px 20px;
+            }
+            
             .header h1 {
                 font-size: 2.2rem;
             }
             
             .content {
-                padding: 25px;
+                padding: 30px;
+            }
+            
+            .details-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
             }
             
             .radio-group {
@@ -261,15 +474,54 @@
                 flex-direction: column;
                 gap: 15px;
             }
+            
+            .logo-container {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+            }
+            
+            .logo-text {
+                text-align: center;
+            }
+        }
+        
+        /* Loading animation */
+        .loading {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .loading::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            animation: loading 1.5s infinite;
+        }
+        
+        @keyframes loading {
+            0% { left: -100%; }
+            100% { left: 100%; }
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
+            <div class="header-decoration">
+                <i class="fas fa-star-and-crescent"></i>
+            </div>
+            
             <div class="logo-container">
-                <img src="NAISICON.png" alt="NAIS Technologies" class="logo-image" 
-                     onerror="this.onerror=null; this.src='https://nais.com.my/images/NAISICON.png';">
+                <!-- Logo with white background container to preserve original look -->
+                <div class="logo-wrapper">
+                    <img src="NAISICON.png" alt="NAIS Technologies" class="logo-image" 
+                         onerror="this.onerror=null; this.src='https://nais.com.my/images/NAISICON.png'; this.alt='NAIS Technologies';">
+                </div>
                 <div class="logo-text">
                     <div class="company-name">NAIS TECHNOLOGIES</div>
                     <div class="tagline">Empowering Connectivity, Enhancing Innovation</div>
@@ -282,16 +534,16 @@
         
         <div class="content">
             <div class="invitation-details">
-                <h2 style="color: var(--primary); margin-bottom: 15px;">You're Cordially Invited</h2>
-                <p style="color: var(--gray); margin-bottom: 20px;">Join us for an evening of blessings, delicious food, and cherished company as we break our fast together during this holy month of Ramadhan.</p>
+                <h2>You're Cordially Invited</h2>
+                <p>Join us for an evening of blessings, delicious food, and cherished company as we break our fast together during this holy month of Ramadhan.</p>
                 
                 <div class="details-grid">
                     <div class="detail-item">
                         <div class="detail-icon">
                             <i class="fas fa-calendar-alt"></i>
                         </div>
-                        <div>
-                            <strong style="color: var(--primary);">Date</strong>
+                        <div class="detail-content">
+                            <strong>Date</strong>
                             <p>6 March 2026 (Friday)</p>
                         </div>
                     </div>
@@ -300,8 +552,8 @@
                         <div class="detail-icon">
                             <i class="fas fa-clock"></i>
                         </div>
-                        <div>
-                            <strong style="color: var(--primary);">Time</strong>
+                        <div class="detail-content">
+                            <strong>Time</strong>
                             <p>6:30 PM - 9:00 PM</p>
                         </div>
                     </div>
@@ -310,8 +562,8 @@
                         <div class="detail-icon">
                             <i class="fas fa-map-marker-alt"></i>
                         </div>
-                        <div>
-                            <strong style="color: var(--primary);">Location</strong>
+                        <div class="detail-content">
+                            <strong>Location</strong>
                             <p>Shah Alam<br>Venue To Be Confirmed</p>
                         </div>
                     </div>
@@ -319,8 +571,8 @@
             </div>
             
             <div class="rsvp-form">
-                <h2 style="color: var(--primary); margin-bottom: 20px;">RSVP Form</h2>
-                <p style="color: var(--gray); margin-bottom: 25px;">Please fill out this form by <strong style="color: var(--primary);">1 March 2026</strong> to help us with preparations.</p>
+                <h2>RSVP Form</h2>
+                <p>Please fill out this form by <strong style="color: var(--primary);">1 March 2026</strong> to help us with preparations.</p>
                 
                 <form id="rsvpForm">
                     <div class="form-group">
@@ -329,11 +581,8 @@
                     </div>
                     
                     <div class="form-group">
-                        <label for="email">Email Address *</label>
-                        <input type="email" id="email" class="form-control" placeholder="Enter your email address" required>
-                        <small style="color: var(--gray); display: block; margin-top: 5px;">
-                            The official invitation will be sent to this email immediately
-                        </small>
+                        <label for="phone">Phone Number *</label>
+                        <input type="tel" id="phone" class="form-control" placeholder="Enter your phone number" required>
                     </div>
                     
                     <div class="form-group">
@@ -354,14 +603,14 @@
                     
                     <div class="form-group hidden" id="numPeopleGroup">
                         <label for="numPeople">Number of People Attending *</label>
-                        <input type="number" id="numPeople" class="form-control" placeholder="Enter number of people" min="1" max="20">
-                        <small style="color: var(--gray); display: block; margin-top: 5px;">
-                            Total number of people including yourself
+                        <input type="number" id="numPeople" class="form-control" placeholder="Enter number of people (e.g., 2)" min="1" max="20">
+                        <small style="color: var(--gray); font-size: 0.9rem; margin-top: 8px; display: block;">
+                            Please enter the total number of people including yourself
                         </small>
                     </div>
                     
-                    <button type="submit" class="submit-btn" id="submitBtn">
-                        <i class="fas fa-paper-plane"></i> Submit RSVP & Receive Invitation
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-paper-plane"></i> Submit RSVP
                     </button>
                 </form>
             </div>
@@ -378,17 +627,17 @@
                     <a href="mailto:support@nais.com.my" class="contact-link">support@nais.com.my</a>
                 </div>
             </div>
-            <p style="color: #94A3B8; font-size: 0.9rem; margin-top: 10px;">
+            <p class="footer-text">
                 NAIS Technologies Sdn Bhd • Majlis Berbuka Puasa 2026 • Ramadhan Kareem
             </p>
         </div>
     </div>
 
     <script>
-        // Apps Script URL - USE YOUR ACTUAL URL
+        // Your Apps Script deployment URL
         const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbymZBeX_0pmRYKvj-vFE01enZU5FTWFfFD3tJJ2CNzpvpdtHC_gyyZfrp1Y_g72KdPfvQ/exec';
         
-        // Show/hide number of people field
+        // Show/hide number of people field based on attendance selection
         document.querySelectorAll('input[name="attendance"]').forEach(radio => {
             radio.addEventListener('change', function() {
                 const numPeopleGroup = document.getElementById('numPeopleGroup');
@@ -403,89 +652,80 @@
             });
         });
         
-        // Form submission
+        // Form submission handler
         document.getElementById('rsvpForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
-            const submitBtn = document.getElementById('submitBtn');
+            const submitBtn = this.querySelector('button[type="submit"]');
             const originalText = submitBtn.innerHTML;
             
             // Show loading state
-            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending invitation...';
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+            submitBtn.classList.add('loading');
             submitBtn.disabled = true;
             
-            // Get form data
+            // Collect form data
             const attendance = document.querySelector('input[name="attendance"]:checked').value;
             const formData = {
-                name: document.getElementById('name').value.trim(),
-                email: document.getElementById('email').value.trim().toLowerCase(),
+                name: document.getElementById('name').value,
+                phone: document.getElementById('phone').value,
                 attendance: attendance,
-                numPeople: attendance === 'Hadir' ? parseInt(document.getElementById('numPeople').value) || 1 : 0
+                numPeople: attendance === 'Hadir' ? document.getElementById('numPeople').value : 0
             };
             
-            // Validate email
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(formData.email)) {
-                alert('Please enter a valid email address');
-                submitBtn.innerHTML = originalText;
-                submitBtn.disabled = false;
-                return;
-            }
-            
             // Validate number of people if attending
-            if (attendance === 'Hadir' && (!formData.numPeople || formData.numPeople < 1)) {
-                alert('Please enter a valid number of people (minimum 1)');
-                submitBtn.innerHTML = originalText;
-                submitBtn.disabled = false;
-                return;
-            }
-            
-            if (attendance === 'Hadir' && formData.numPeople > 20) {
-                alert('Maximum 20 people per RSVP. Please contact host for larger groups.');
-                submitBtn.innerHTML = originalText;
-                submitBtn.disabled = false;
-                return;
+            if (attendance === 'Hadir') {
+                const numPeople = parseInt(formData.numPeople);
+                if (!numPeople || numPeople < 1) {
+                    alert('Please enter a valid number of people (minimum 1)');
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.classList.remove('loading');
+                    submitBtn.disabled = false;
+                    return;
+                }
+                if (numPeople > 20) {
+                    alert('Maximum 20 people per RSVP. Please contact host for larger groups.');
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.classList.remove('loading');
+                    submitBtn.disabled = false;
+                    return;
+                }
             }
             
             try {
-                // Send data to Apps Script - REMOVED mode: 'no-cors'
+                // Send data to Google Apps Script
                 const response = await fetch(APPS_SCRIPT_URL, {
                     method: 'POST',
+                    mode: 'no-cors',
                     headers: {
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify(formData)
                 });
                 
-                const result = await response.json();
-                
-                if (result.success) {
-                    // Store data for thank you page
-                    sessionStorage.setItem('rsvpData', JSON.stringify({
-                        name: formData.name,
-                        email: formData.email,
-                        attendance: formData.attendance,
-                        numPeople: formData.numPeople,
-                        emailSent: result.emailSent || false
-                    }));
-                    
-                    // Redirect to thank you page
-                    window.location.href = 'thankyou.html';
-                    
-                } else {
-                    throw new Error(result.error || 'Submission failed');
-                }
+                // Redirect to thank you page
+                window.location.href = 'thankyou.html';
                 
             } catch (error) {
-                console.error('Error:', error);
-                alert('Error submitting RSVP: ' + error.message + '\nPlease try again or contact support.');
+                alert('Error submitting RSVP. Please try again or contact the host.');
                 submitBtn.innerHTML = originalText;
+                submitBtn.classList.remove('loading');
                 submitBtn.disabled = false;
             }
         });
         
-        // Initialize form
+        // Initialize form state
         document.getElementById('numPeopleGroup').classList.add('hidden');
+        
+        // Add hover effects to detail items
+        document.querySelectorAll('.detail-item').forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-5px)';
+            });
+            item.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
     </script>
 </body>
 </html>
