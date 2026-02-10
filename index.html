@@ -767,7 +767,7 @@
             });
         });
         
-        // Form submission handler
+               // Form submission handler - UPDATED WITH PHONE CLEANING
         document.getElementById('rsvpForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
@@ -781,9 +781,23 @@
             
             // Collect form data
             const attendance = document.querySelector('input[name="attendance"]:checked').value;
+            
+            // Get and clean phone number - ADDED THIS
+            let phone = document.getElementById('phone').value;
+            phone = phone.replace(/\D/g, ''); // Remove all non-digit characters
+            
+            // Validate phone number
+            if (!phone || phone.length < 9 || phone.length > 11) {
+                alert('Please enter a valid Malaysia phone number (9-11 digits)\nExamples: 0132169580 or 132169580');
+                submitBtn.innerHTML = originalText;
+                submitBtn.classList.remove('loading');
+                submitBtn.disabled = false;
+                return;
+            }
+            
             const formData = {
                 name: document.getElementById('name').value,
-                phone: document.getElementById('phone').value,
+                phone: phone, // Send cleaned number
                 attendance: attendance,
                 numPeople: attendance === 'Hadir' ? document.getElementById('numPeople').value : 0
             };
@@ -844,5 +858,6 @@
     </script>
 </body>
 </html>
+
 
 
