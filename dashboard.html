@@ -1,122 +1,391 @@
-<script>
-    // Your Apps Script deployment URL
-    const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbymZBeX_0pmRYKvj-vFE01enZU5FTWFfFD3tJJ2CNzpvpdtHC_gyyZfrp1Y_g72KdPfvQ/exec';
-    
-    let dashboardData = null;
-    
-    // Format date
-    function formatDate(dateString) {
-        const date = new Date(dateString);
-        return date.toLocaleDateString('en-MY', {
-            day: '2-digit',
-            month: 'short',
-            year: 'numeric',
-            hour: '2-digit',
-            minute: '2-digit'
-        });
-    }
-    
-    // Fetch dashboard data
-    async function fetchDashboardData() {
-        try {
-            const response = await fetch(APPS_SCRIPT_URL);
-            const data = await response.json();
-            
-            if (data.success) {
-                dashboardData = data;
-                updateDashboard();
-                updateLastUpdated();
-            } else {
-                throw new Error(data.error || 'Failed to fetch data');
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance Dashboard - NAIS Technologies Majlis</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1A3C6E;
+            --secondary: #FF6B35;
+            --accent: #2ECC71;
+            --light: #F8FAFC;
+            --dark: #0A2540;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #F8FAFC 0%, #E8F0F7 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, #2C5282 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(10, 37, 64, 0.1);
+            margin-bottom: 40px;
+        }
+        
+        .header-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo {
+            height: 50px;
+            width: 50px;
+            background: white;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+        
+        .logo-text {
+            text-align: left;
+        }
+        
+        .logo-text .company-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+        }
+        
+        .logo-text .event-name {
+            font-size: 0.9rem;
+            color: #CBD5E0;
+        }
+        
+        .header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .header p {
+            color: #CBD5E0;
+            font-size: 1rem;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .stat-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 8px 25px rgba(10, 37, 64, 0.05);
+            text-align: center;
+            transition: transform 0.3s;
+            border: 1px solid #E2E8F0;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(10, 37, 64, 0.1);
+        }
+        
+        .stat-card.primary {
+            border-top: 5px solid var(--primary);
+        }
+        
+        .stat-card.secondary {
+            border-top: 5px solid var(--secondary);
+        }
+        
+        .stat-card.accent {
+            border-top: 5px solid var(--accent);
+        }
+        
+        .stat-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .primary .stat-icon {
+            color: var(--primary);
+        }
+        
+        .secondary .stat-icon {
+            color: var(--secondary);
+        }
+        
+        .accent .stat-icon {
+            color: var(--accent);
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            margin: 10px 0;
+        }
+        
+        .primary .stat-number {
+            color: var(--primary);
+        }
+        
+        .secondary .stat-number {
+            color: var(--secondary);
+        }
+        
+        .accent .stat-number {
+            color: var(--accent);
+        }
+        
+        .stat-label {
+            font-size: 1.1rem;
+            color: #64748B;
+        }
+        
+        .recent-rsvp {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 8px 25px rgba(10, 37, 64, 0.05);
+            margin-bottom: 30px;
+            border: 1px solid #E2E8F0;
+        }
+        
+        .recent-rsvp h2 {
+            color: var(--primary);
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #E2E8F0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        th {
+            background: #F1F5F9;
+            padding: 15px;
+            text-align: left;
+            color: var(--dark);
+            font-weight: 600;
+            border-bottom: 2px solid #E2E8F0;
+        }
+        
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #E2E8F0;
+        }
+        
+        tr:hover {
+            background: #F8FAFC;
+        }
+        
+        .attendance-badge {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        
+        .attending {
+            background: #D1FAE5;
+            color: #065F46;
+        }
+        
+        .not-attending {
+            background: #FEE2E2;
+            color: #991B1B;
+        }
+        
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .refresh-btn {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s;
+        }
+        
+        .refresh-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(26, 60, 110, 0.2);
+        }
+        
+        .last-updated {
+            color: #64748B;
+            font-size: 0.9rem;
+        }
+        
+        .back-link {
+            display: inline-block;
+            margin-top: 30px;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            background: #E8F0F7;
+            padding: 10px 20px;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+        
+        .back-link:hover {
+            background: #DBEAFE;
+            color: var(--primary);
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #64748B;
+        }
+        
+        .password-protection {
+            max-width: 400px;
+            margin: 100px auto;
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(10, 37, 64, 0.1);
+            border: 1px solid #E2E8F0;
+            text-align: center;
+        }
+        
+        .password-protection h2 {
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .password-input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #E2E8F0;
+            border-radius: 8px;
+            font-size: 1rem;
+            margin-bottom: 15px;
+            transition: all 0.3s;
+        }
+        
+        .password-input:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(26, 60, 110, 0.1);
+        }
+        
+        .login-btn {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            width: 100%;
+            transition: all 0.3s;
+        }
+        
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(26, 60, 110, 0.2);
+        }
+        
+        @media (max-width: 768px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
             }
-        } catch (error) {
-            alert('Error loading dashboard data: ' + error.message);
-        }
-    }
-    
-    // Update dashboard UI
-    function updateDashboard() {
-        // Update stats
-        document.getElementById('totalAttendees').textContent = dashboardData.totalAttendees;
-        document.getElementById('totalResponses').textContent = dashboardData.totalResponses;
-        
-        // Calculate attendance rate
-        const attendanceRate = dashboardData.totalResponses > 0 
-            ? Math.round((dashboardData.totalAttendees / (dashboardData.totalResponses * 2)) * 100) 
-            : 0;
-        document.getElementById('attendanceRate').textContent = attendanceRate + '%';
-        
-        // Update recent RSVPs table
-        const tableBody = document.getElementById('rsvpTableBody');
-        tableBody.innerHTML = '';
-        
-        if (dashboardData.latestRSVPs && dashboardData.latestRSVPs.length > 0) {
-            dashboardData.latestRSVPs.forEach(row => {
-                // Skip header row if present
-                if (row[0] === 'Timestamp') return;
-                
-                const tr = document.createElement('tr');
-                
-                // Name
-                const tdName = document.createElement('td');
-                tdName.textContent = row[1] || 'N/A';
-                tr.appendChild(tdName);
-                
-                // Phone
-                const tdPhone = document.createElement('td');
-                tdPhone.textContent = row[2] || 'N/A';
-                tr.appendChild(tdPhone);
-                
-                // Attendance
-                const tdAttendance = document.createElement('td');
-                const badge = document.createElement('span');
-                badge.className = `attendance-badge ${row[3] === 'Hadir' ? 'attending' : 'not-attending'}`;
-                badge.textContent = row[3] || 'N/A';
-                tdAttendance.appendChild(badge);
-                tr.appendChild(tdAttendance);
-                
-                // Number of people
-                const tdNumPeople = document.createElement('td');
-                tdNumPeople.textContent = row[3] === 'Hadir' ? (row[4] || '1') : '0';
-                tr.appendChild(tdNumPeople);
-                
-                // Timestamp
-                const tdTimestamp = document.createElement('td');
-                tdTimestamp.textContent = formatDate(row[0]);
-                tr.appendChild(tdTimestamp);
-                
-                tableBody.appendChild(tr);
-            });
             
-            // Show table
-            document.getElementById('loadingTable').style.display = 'none';
-            document.getElementById('rsvpTable').style.display = 'table';
+            table {
+                display: block;
+                overflow-x: auto;
+            }
+            
+            .controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .header-top {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+            
+            .logo-container {
+                justify-content: center;
+            }
         }
-    }
-    
-    // Update last updated time
-    function updateLastUpdated() {
-        const now = new Date();
-        document.getElementById('lastUpdated').textContent = now.toLocaleTimeString('en-MY');
-    }
-    
-    // Refresh button event
-    document.getElementById('refreshBtn').addEventListener('click', async function() {
-        const btn = this;
-        const originalHtml = btn.innerHTML;
+    </style>
+</head>
+<body>
+    <div id="passwordSection" class="password-protection">
+        <div class="logo-container" style="justify-content: center; margin-bottom: 20px;">
+            <div class="logo">
+                N
+            </div>
+            <div class="logo-text">
+                <div class="company-name">NAIS TECHNOLOGIES</div>
+            </div>
+        </div>
         
-        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Refreshing...';
-        btn.disabled = true;
+        <h2><i class="fas fa-lock"></i> Admin Dashboard</h2>
+        <p style="color: #64748B; margin-bottom: 20px;">Enter password to access attendance data</p>
         
-        await fetchDashboardData();
-        
-        btn.innerHTML = originalHtml;
-        btn.disabled = false;
-    });
+        <input type="password" id="passwordInput" class="password-input" placeholder="Enter dashboard password">
+        <button id="loginBtn" class="login-btn">
+            <i class="fas fa-sign-in-alt"></i> Access Dashboard
+        </button>
+    </div>
     
-    // Auto-refresh every 30 seconds
-    setInterval(fetchDashboardData, 30000);
-    
-    // Initial load
-    fetchDashboardData();
-</script>
+    <div id="dashboardContent" class="container" style="display: none;">
+        <div class="header">
+            <div class="header-top">
+                <div class="logo-container">
+                    <div class="logo">
+                        N
+                    </
