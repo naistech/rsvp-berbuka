@@ -93,11 +93,22 @@
             animation: float 6s ease-in-out infinite;
         }
         
+        /* Logo Container with white background to preserve original look */
+        .logo-wrapper {
+            background: white;
+            padding: 15px;
+            border-radius: 16px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
         .logo-image {
             height: 70px;
             width: auto;
             object-fit: contain;
-            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
+            /* Remove any filters that might affect appearance */
         }
         
         .logo-text {
@@ -506,9 +517,11 @@
             </div>
             
             <div class="logo-container">
-                <!-- Logo with background preserved -->
-                <img src="NAISICON.png" alt="NAIS Technologies" class="logo-image" 
-                     onerror="this.onerror=null; this.src='https://nais.com.my/images/NAISICON.png'; this.alt='NAIS Technologies';">
+                <!-- Logo with white background container to preserve original look -->
+                <div class="logo-wrapper">
+                    <img src="NAISICON.png" alt="NAIS Technologies" class="logo-image" 
+                         onerror="this.onerror=null; this.src='https://nais.com.my/images/NAISICON.png'; this.alt='NAIS Technologies';">
+                </div>
                 <div class="logo-text">
                     <div class="company-name">NAIS TECHNOLOGIES</div>
                     <div class="tagline">Empowering Connectivity, Enhancing Innovation</div>
