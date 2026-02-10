@@ -314,24 +314,26 @@
             </div>
             
             <div class="logo-container">
-                <img src="https://nais.com.my/images/NAISICON.png" alt="NAIS Technologies" class="logo-image" onerror="this.style.display='none'; document.getElementById('fallbackLogo').style.display='flex';">
+                <!-- First try local file, then fallback to external URL -->
+                <img src="NAISICON.png" alt="NAIS Technologies" class="logo-image" 
+                     onerror="this.onerror=null; this.src='https://nais.com.my/images/NAISICON.png'; this.alt='NAIS Technologies'; document.getElementById('fallbackLogo').style.display='none';">
                 <div id="fallbackLogo" class="logo-image" style="display: none; height: 60px; width: 60px; background: white; border-radius: 12px; align-items: center; justify-content: center; color: var(--primary); font-weight: 700; font-size: 1.8rem;">
                     N
                 </div>
                 <div class="logo-text">
                     <div class="company-name">NAIS TECHNOLOGIES</div>
-                    <div class="tagline">Innovating Tomorrow, Today</div>
+                    <div class="tagline">Empowering Connectivity, Enhancing Innovation</div>
                 </div>
             </div>
             
             <h1>Majlis Berbuka Puasa</h1>
-            <p>March 2026 • Shah Alam</p>
+            <p>Ramadhan Kareem</p>
         </div>
         
         <div class="content">
             <div class="invitation-details">
                 <h2 style="color: var(--primary); margin-bottom: 15px;">You're Cordially Invited</h2>
-                <p>Join us for an evening of blessings, delicious food, and cherished company as we break our fast together during this holy month.</p>
+                <p>Join us for an evening of blessings, delicious food, and cherished company as we break our fast together during this holy month of Ramadhan.</p>
                 
                 <div class="details-grid">
                     <div class="detail-item">
@@ -424,7 +426,7 @@
                 </div>
             </div>
             <p style="color: #94A3B8; font-size: 0.85rem; margin-top: 10px;">
-                NAIS Technologies Sdn Bhd • Majlis Berbuka Puasa 2026
+                NAIS Technologies Sdn Bhd • Majlis Berbuka Puasa 2026 • Ramadhan Kareem
             </p>
         </div>
     </div>
