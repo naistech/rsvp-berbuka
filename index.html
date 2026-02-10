@@ -93,22 +93,10 @@
             animation: float 6s ease-in-out infinite;
         }
         
-        /* Logo Container with white background to preserve original look */
-        .logo-wrapper {
-            background: white;
-            padding: 15px;
-            border-radius: 16px;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
         .logo-image {
             height: 70px;
             width: auto;
             object-fit: contain;
-            /* Remove any filters that might affect appearance */
         }
         
         .logo-text {
@@ -517,11 +505,8 @@
             </div>
             
             <div class="logo-container">
-                <!-- Logo with white background container to preserve original look -->
-                <div class="logo-wrapper">
-                    <img src="NAISICON.png" alt="NAIS Technologies" class="logo-image" 
-                         onerror="this.onerror=null; this.src='https://nais.com.my/images/NAISICON.png'; this.alt='NAIS Technologies';">
-                </div>
+                <img src="NAISICON.png" alt="NAIS Technologies" class="logo-image" 
+                     onerror="this.onerror=null; this.src='https://nais.com.my/images/NAISICON.png'; this.alt='NAIS Technologies';">
                 <div class="logo-text">
                     <div class="company-name">NAIS TECHNOLOGIES</div>
                     <div class="tagline">Empowering Connectivity, Enhancing Innovation</div>
@@ -581,8 +566,11 @@
                     </div>
                     
                     <div class="form-group">
-                        <label for="phone">Phone Number *</label>
-                        <input type="tel" id="phone" class="form-control" placeholder="Enter your phone number" required>
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" class="form-control" placeholder="Enter your email address" required>
+                        <small style="color: var(--gray); font-size: 0.9rem; margin-top: 8px; display: block;">
+                            We'll send the official invitation to this email
+                        </small>
                     </div>
                     
                     <div class="form-group">
@@ -668,10 +656,20 @@
             const attendance = document.querySelector('input[name="attendance"]:checked').value;
             const formData = {
                 name: document.getElementById('name').value,
-                phone: document.getElementById('phone').value,
+                email: document.getElementById('email').value,
                 attendance: attendance,
                 numPeople: attendance === 'Hadir' ? document.getElementById('numPeople').value : 0
             };
+            
+            // Validate email format
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(formData.email)) {
+                alert('Please enter a valid email address');
+                submitBtn.innerHTML = originalText;
+                submitBtn.classList.remove('loading');
+                submitBtn.disabled = false;
+                return;
+            }
             
             // Validate number of people if attending
             if (attendance === 'Hadir') {
