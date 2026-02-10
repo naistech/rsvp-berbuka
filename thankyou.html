@@ -375,4 +375,100 @@
         <p>Your RSVP has been successfully submitted to NAIS Technologies Sdn Bhd. We have recorded your attendance.</p>
         
         <div class="highlight">
-            <h3><i class="fas fa-info-circle"></i> Event Details</
+            <h3><i class="fas fa-info-circle"></i> Event Details</h3>
+            <div class="event-details">
+                <div class="event-detail">
+                    <div class="detail-icon">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <div>
+                        <strong>Date</strong>
+                        <p>6 March 2026 (Friday)</p>
+                    </div>
+                </div>
+                
+                <div class="event-detail">
+                    <div class="detail-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div>
+                        <strong>Time</strong>
+                        <p>6:30 PM - 9:00 PM</p>
+                    </div>
+                </div>
+                
+                <div class="event-detail">
+                    <div class="detail-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div>
+                        <strong>Location</strong>
+                        <p>Shah Alam<br>Venue To Be Confirmed</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <p>We look forward to sharing this blessed occasion with you. If you need to update your RSVP or have any questions, please contact us.</p>
+        
+        <a href="index.html" class="btn">
+            <i class="fas fa-arrow-left"></i> Back to Invitation
+        </a>
+        
+        <div class="contact-info">
+            <p>For any inquiries, please contact:</p>
+            <div class="contact-links">
+                <a href="tel:+60132169580" class="contact-link">
+                    <i class="fas fa-phone"></i> +60 13-216 9580
+                </a>
+                <a href="mailto:support@nais.com.my" class="contact-link">
+                    <i class="fas fa-envelope"></i> support@nais.com.my
+                </a>
+            </div>
+            <div class="ramadhan-message">
+                Ramadhan Kareem from NAIS Technologies
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Create confetti effect
+        function createConfetti() {
+            const container = document.getElementById('confettiContainer');
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.animationDelay = Math.random() * 2 + 's';
+                confetti.style.width = Math.random() * 10 + 5 + 'px';
+                confetti.style.height = confetti.style.width;
+                container.appendChild(confetti);
+                
+                // Remove confetti after animation
+                setTimeout(() => {
+                    confetti.remove();
+                }, 3000);
+            }
+        }
+        
+        // Create confetti on page load
+        window.addEventListener('load', () => {
+            createConfetti();
+            // Add more confetti every 2 seconds for a few times
+            for (let i = 1; i <= 3; i++) {
+                setTimeout(createConfetti, i * 2000);
+            }
+        });
+        
+        // Add hover animations to event details
+        document.querySelectorAll('.event-detail').forEach(detail => {
+            detail.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateX(5px)';
+            });
+            detail.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateX(0)';
+            });
+        });
+    </script>
+</body>
+</html>
