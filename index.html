@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Majlis Berbuka Puasa - RSVP</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2D5A27;
+            --secondary: #D4AF37;
+            --accent: #8B0000;
+            --light: #F8F5E9;
+            --dark: #1A3C1E;
+            --shadow: 0 8px 30px rgba(0,0,0,0.08);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #F8F5E9 0%, #E8F5E8 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(to right, var(--primary), var(--dark));
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .header-decoration {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 2rem;
+            color: var(--secondary);
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .invitation-details {
+            background: #F9F7F0;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 40px;
+            border-left: 5px solid var(--secondary);
+        }
+        
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .detail-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .detail-icon {
+            background: var(--primary);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+        
+        .rsvp-form {
+            margin-top: 30px;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--dark);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 14px 18px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(45, 90, 39, 0.1);
+        }
+        
+        .radio-group {
+            display: flex;
+            gap: 20px;
+            margin-top: 10px;
+        }
+        
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+        
+        .radio-option input {
+            display: none;
+        }
+        
+        .radio-custom {
+            width: 22px;
+            height: 22px;
+            border: 2px solid #ccc;
+            border-radius: 50%;
+            display: inline-block;
+            position: relative;
+        }
+        
+        .radio-option input:checked + .radio-custom {
+            border-color: var(--primary);
+        }
+        
+        .radio-option input:checked + .radio-custom::after {
+            content: '';
+            width: 12px;
+            height: 12px;
+            background: var(--primary);
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .submit-btn {
+            background: linear-gradient(to right, var(--primary), var(--dark));
+            color: white;
+            border: none;
+            padding: 16px 40px;
+            font-size: 1.1rem;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            display: block;
+            width: 100%;
+            margin-top: 20px;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(45, 90, 39, 0.2);
+        }
+        
+        .submit-btn:active {
+            transform: translateY(-1px);
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 25px;
+            color: #666;
+            font-size: 0.9rem;
+            border-top: 1px solid #eee;
+            background: #F9F9F9;
+        }
+        
+        .dashboard-link {
+            display: inline-block;
+            margin-top: 15px;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .dashboard-link:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                border-radius: 15px;
+            }
+            
+            .header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .content {
+                padding: 25px;
+            }
+            
+            .details-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-decoration">
+                <i class="fas fa-moon"></i>
+            </div>
+            <h1>Majlis Berbuka Puasa</h1>
+            <p>Keluarga Ahmad & Zainab</p>
+        </div>
+        
+        <div class="content">
+            <div class="invitation-details">
+                <h2 style="color: var(--primary); margin-bottom: 15px;">You're Cordially Invited</h2>
+                <p>Join us for an evening of blessings, delicious food, and cherished company as we break our fast together during this holy month.</p>
+                
+                <div class="details-grid">
+                    <div class="detail-item">
+                        <div class="detail-icon">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <div>
+                            <strong>Date</strong>
+                            <p>15 April 2024 (Monday)</p>
+                        </div>
+                    </div>
+                    
+                    <div class="detail-item">
+                        <div class="detail-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div>
+                            <strong>Time</strong>
+                            <p>6:30 PM - 9:00 PM</p>
+                        </div>
+                    </div>
+                    
+                    <div class="detail-item">
+                        <div class="detail-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div>
+                            <strong>Location</strong>
+                            <p>Grand Ballroom, Seri Pacific Hotel<br>Kuala Lumpur</p>
+                        </div>
+                    </div>
+                    
+                    <div class="detail-item">
+                        <div class="detail-icon">
+                            <i class="fas fa-user-friends"></i>
+                        </div>
+                        <div>
+                            <strong>Dress Code</strong>
+                            <p>Traditional / Smart Casual</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="rsvp-form">
+                <h2 style="color: var(--primary); margin-bottom: 20px;">RSVP Form</h2>
+                <p style="margin-bottom: 25px; color: #666;">Please fill out this form by <strong>10 April 2024</strong> to help us with preparations.</p>
+                
+                <form id="rsvpForm">
+                    <div class="form-group">
+                        <label for="name">Full Name *</label>
+                        <input type="text" id="name" class="form-control" placeholder="Enter your full name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">Phone Number *</label>
+                        <input type="tel" id="phone" class="form-control" placeholder="Enter your phone number" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Attendance *</label>
+                        <div class="radio-group">
+                            <label class="radio-option">
+                                <input type="radio" name="attendance" value="Hadir" required>
+                                <span class="radio-custom"></span>
+                                <span>Hadir (Attending)</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="attendance" value="Tidak Hadir" required>
+                                <span class="radio-custom"></span>
+                                <span>Tidak Hadir (Not Attending)</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group" id="numPeopleGroup">
+                        <label for="numPeople">Number of People Attending *</label>
+                        <select id="numPeople" class="form-control" required>
+                            <option value="">Select number</option>
+                            <option value="1">1 person</option>
+                            <option value="2">2 people</option>
+                            <option value="3">3 people</option>
+                            <option value="4">4 people</option>
+                            <option value="5">5 people</option>
+                            <option value="6">6+ people</option>
+                        </select>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-paper-plane"></i> Submit RSVP
+                    </button>
+                </form>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>For inquiries, please contact: +60 12-345 6789</p>
+            <a href="dashboard.html" class="dashboard-link">View Attendance Dashboard (Host Only)</a>
+        </div>
+    </div>
+
+    <script>
+        // Your Apps Script deployment URL
+        const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbymZBeX_0pmRYKvj-vFE01enZU5FTWFfFD3tJJ2CNzpvpdtHC_gyyZfrp1Y_g72KdPfvQ/exec';
+        
+        // Show/hide number of people field based on attendance selection
+        document.querySelectorAll('input[name="attendance"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                const numPeopleGroup = document.getElementById('numPeopleGroup');
+                if (this.value === 'Hadir') {
+                    numPeopleGroup.classList.remove('hidden');
+                    document.getElementById('numPeople').required = true;
+                } else {
+                    numPeopleGroup.classList.add('hidden');
+                    document.getElementById('numPeople').required = false;
+                    document.getElementById('numPeople').value = '';
+                }
+            });
+        });
+        
+        // Form submission handler
+        document.getElementById('rsvpForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            
+            // Show loading state
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+            submitBtn.disabled = true;
+            
+            // Collect form data
+            const formData = {
+                name: document.getElementById('name').value,
+                phone: document.getElementById('phone').value,
+                attendance: document.querySelector('input[name="attendance"]:checked').value,
+                numPeople: document.getElementById('numPeople').value
+            };
+            
+            try {
+                // Send data to Google Apps Script
+                const response = await fetch(APPS_SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors', // Important for Google Apps Script
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData)
+                });
+                
+                // Since we're using no-cors, we can't read the response
+                // But we know it succeeded if we got here
+                
+                // Redirect to thank you page
+                window.location.href = 'thankyou.html';
+                
+            } catch (error) {
+                alert('Error submitting RSVP. Please try again or contact the host.');
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }
+        });
+        
+        // Initialize form state
+        document.getElementById('numPeopleGroup').classList.add('hidden');
+    </script>
+</body>
+</html>

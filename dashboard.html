@@ -1,0 +1,122 @@
+<script>
+    // Your Apps Script deployment URL
+    const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbymZBeX_0pmRYKvj-vFE01enZU5FTWFfFD3tJJ2CNzpvpdtHC_gyyZfrp1Y_g72KdPfvQ/exec';
+    
+    let dashboardData = null;
+    
+    // Format date
+    function formatDate(dateString) {
+        const date = new Date(dateString);
+        return date.toLocaleDateString('en-MY', {
+            day: '2-digit',
+            month: 'short',
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+        });
+    }
+    
+    // Fetch dashboard data
+    async function fetchDashboardData() {
+        try {
+            const response = await fetch(APPS_SCRIPT_URL);
+            const data = await response.json();
+            
+            if (data.success) {
+                dashboardData = data;
+                updateDashboard();
+                updateLastUpdated();
+            } else {
+                throw new Error(data.error || 'Failed to fetch data');
+            }
+        } catch (error) {
+            alert('Error loading dashboard data: ' + error.message);
+        }
+    }
+    
+    // Update dashboard UI
+    function updateDashboard() {
+        // Update stats
+        document.getElementById('totalAttendees').textContent = dashboardData.totalAttendees;
+        document.getElementById('totalResponses').textContent = dashboardData.totalResponses;
+        
+        // Calculate attendance rate
+        const attendanceRate = dashboardData.totalResponses > 0 
+            ? Math.round((dashboardData.totalAttendees / (dashboardData.totalResponses * 2)) * 100) 
+            : 0;
+        document.getElementById('attendanceRate').textContent = attendanceRate + '%';
+        
+        // Update recent RSVPs table
+        const tableBody = document.getElementById('rsvpTableBody');
+        tableBody.innerHTML = '';
+        
+        if (dashboardData.latestRSVPs && dashboardData.latestRSVPs.length > 0) {
+            dashboardData.latestRSVPs.forEach(row => {
+                // Skip header row if present
+                if (row[0] === 'Timestamp') return;
+                
+                const tr = document.createElement('tr');
+                
+                // Name
+                const tdName = document.createElement('td');
+                tdName.textContent = row[1] || 'N/A';
+                tr.appendChild(tdName);
+                
+                // Phone
+                const tdPhone = document.createElement('td');
+                tdPhone.textContent = row[2] || 'N/A';
+                tr.appendChild(tdPhone);
+                
+                // Attendance
+                const tdAttendance = document.createElement('td');
+                const badge = document.createElement('span');
+                badge.className = `attendance-badge ${row[3] === 'Hadir' ? 'attending' : 'not-attending'}`;
+                badge.textContent = row[3] || 'N/A';
+                tdAttendance.appendChild(badge);
+                tr.appendChild(tdAttendance);
+                
+                // Number of people
+                const tdNumPeople = document.createElement('td');
+                tdNumPeople.textContent = row[3] === 'Hadir' ? (row[4] || '1') : '0';
+                tr.appendChild(tdNumPeople);
+                
+                // Timestamp
+                const tdTimestamp = document.createElement('td');
+                tdTimestamp.textContent = formatDate(row[0]);
+                tr.appendChild(tdTimestamp);
+                
+                tableBody.appendChild(tr);
+            });
+            
+            // Show table
+            document.getElementById('loadingTable').style.display = 'none';
+            document.getElementById('rsvpTable').style.display = 'table';
+        }
+    }
+    
+    // Update last updated time
+    function updateLastUpdated() {
+        const now = new Date();
+        document.getElementById('lastUpdated').textContent = now.toLocaleTimeString('en-MY');
+    }
+    
+    // Refresh button event
+    document.getElementById('refreshBtn').addEventListener('click', async function() {
+        const btn = this;
+        const originalHtml = btn.innerHTML;
+        
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Refreshing...';
+        btn.disabled = true;
+        
+        await fetchDashboardData();
+        
+        btn.innerHTML = originalHtml;
+        btn.disabled = false;
+    });
+    
+    // Auto-refresh every 30 seconds
+    setInterval(fetchDashboardData, 30000);
+    
+    // Initial load
+    fetchDashboardData();
+</script>
